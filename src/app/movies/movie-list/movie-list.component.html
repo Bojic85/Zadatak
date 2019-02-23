@@ -8,13 +8,20 @@
                 *ngIf='movies && movies.length'>
               <thead>
                   <tr>
-                      <th>Title</th>
-                      <th>Overview</th>
+                        <th></th>
+                        <th>Title</th>
+                        <th>Overview</th>
                   </tr>
               </thead>            
               <tbody>
                   <tr *ngFor='let movie of movies'>
-                      <td>{{ movie.title }}</td>
+                      <td>
+                        <img *ngIf = 'movie.poster_path'
+                            [src] = 'movie.poster_path'
+                            [title] = 'movie.title'
+                            [style.width.px] = 100>
+                      </td>
+                      <td> {{ movie.title }}</td>
                       <td>{{ movie.overview }}</td>
                   </tr>
               </tbody>

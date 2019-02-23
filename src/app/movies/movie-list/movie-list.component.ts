@@ -10,19 +10,26 @@ import { IMovieData } from './movie-data.interface';
 })
 export class MovieListComponent implements OnInit {
   pageTitle = 'The most popular movies';
-  movieList: IMovieList;
   movies: IMovieData[];
   errorMessage = '';
+
+  private posterUrlPreffix = 'http://image.tmdb.org/t/p/w500';
 
   constructor(private theMovieDbService: TheMovieDbService) { }
 
   ngOnInit(): void {
     this.theMovieDbService.getMovieList().subscribe(
       movieList => {
-            this.movieList = movieList;
+            movieList.results.forEach(movie =>{
+              if (movie.poster_path !== null) {
+                movie.poster_path = this.posterUrlPreffix + movie.poster_path;
+              }
+            });
             this.movies = movieList.results;
         },
         error => this.errorMessage = error as any
     );
+
+
   }
 }
