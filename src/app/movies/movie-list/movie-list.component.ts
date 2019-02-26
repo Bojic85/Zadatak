@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TheMovieDbService } from '../the-movie-db.service';
 import { IMovieData } from './movie-data.interface';
-import { MovieListType } from './movie-list-type.enum';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-movie-list',
@@ -14,22 +14,19 @@ export class MovieListComponent implements OnInit {
   errorMessage = '';
 
   private posterUrlPreffix = 'http://image.tmdb.org/t/p/w500';
-  private showListType: MovieListType = MovieListType.Popular;
 
-  @Input('show')
-  set listFilter(value: MovieListType){
-      this.showListType = value;
-      this.Show();
-  }
-
-  constructor(private theMovieDbService: TheMovieDbService) { }
+  constructor(private theMovieDbService: TheMovieDbService,
+              private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.Show();
+    this.route.params.subscribe(params => {
+      this.GetMoviesData(params.list);
+      this.pageTitle = `The top ${params.list} movies`;
+    });
   }
 
-  public Show(): void {
-    this.theMovieDbService.getMovieList(this.showListType).subscribe(
+  private GetMoviesData(listType: string): void {
+    this.theMovieDbService.GetMovieList(listType).subscribe(
       movieList => {
             movieList.results.forEach(movie => {
               if (movie.poster_path !== null) {
@@ -40,7 +37,5 @@ export class MovieListComponent implements OnInit {
         },
         error => this.errorMessage = error as any
     );
-
-    this.pageTitle = `The top ${this.showListType} movies`;
   }
 }

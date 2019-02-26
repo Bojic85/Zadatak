@@ -16,12 +16,17 @@
               <tbody>
                   <tr *ngFor='let movie of movies'>
                       <td>
-                        <img *ngIf = 'movie.poster_path'
-                            [src] = 'movie.poster_path'
-                            [title] = 'movie.title'
-                            [style.width.px] = 100>
+                        <a [routerLink]="['/movie', movie.id]">
+                            <img *ngIf = 'movie.poster_path'
+                                [src] = 'movie.poster_path'
+                                [title] = 'movie.title'
+                                [style.width.px] = 100>
+                        </a>
                       </td>
-                      <td> {{ movie.title }}</td>
+                      <td> <a [routerLink]="['/movie', movie.id]">
+                                {{ movie.title }}
+                            </a>                            
+                      </td>
                       <td>{{ movie.overview }}</td>
                   </tr>
               </tbody>

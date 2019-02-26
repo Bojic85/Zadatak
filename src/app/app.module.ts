@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { MoviesModule } from './movies/movies.module';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,11 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     MoviesModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot([
+      {path: '', redirectTo: 'movies/popular', pathMatch: 'full' },
+      {path: '**', redirectTo: 'movies/popular', pathMatch: 'full' }
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
