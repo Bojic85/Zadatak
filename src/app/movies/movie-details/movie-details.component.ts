@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
 import { TheMovieDbService } from '../the-movie-db.service';
+import { ICast } from './movie-details.interface';
 
 export interface IProduct {
   productId: number;
@@ -25,6 +26,7 @@ export class MovieDetailsComponent implements OnInit {
   releaseDate: string;
   posterUrl: string;
   genres: string;
+  cast: ICast[];
 
   private posterUrlPreffix = 'http://image.tmdb.org/t/p/w500';
 
@@ -51,6 +53,13 @@ export class MovieDetailsComponent implements OnInit {
             if (movieDetails.poster_path !== null) {
               this.posterUrl = this.posterUrlPreffix + movieDetails.poster_path;
             }
+
+            movieDetails.credits.cast.forEach(element => {
+              if (element.profile_path !== null) {
+                element.profile_path = this.posterUrlPreffix + element.profile_path;
+              }
+            });
+            this.cast = movieDetails.credits.cast;
         }
     );
   }

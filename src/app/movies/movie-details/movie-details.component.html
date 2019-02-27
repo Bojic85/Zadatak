@@ -13,22 +13,45 @@
       </div> 
       <div class='col-md-6'>
         <div class='row'>
-          <div class='col-md-4'>Release date:</div>
+          <div class='col-md-4'><h5>Release date:</h5></div>
           <div class='col-md-6'>{{releaseDate | date}} </div>
         </div>   
         <div class='row'>
-            <div class='col-md-4'>Genres:</div>
+            <div class='col-md-4'><h5>Genres:</h5></div>
             <div class='col-md-6'>{{genres}} </div>
           </div>       
       </div>           
     </div>
     <div class='row'>
-        <div class='col-md-2'>Overview:</div>
+        <div class='col-md-2'><h4>Overview:</h4></div>
     </div>
     <div class='row'>
         <div class='col-md-10'>{{overview}}</div>
     </div>
-  </div>
+    <div class='row'>
+      <div class='col-md-2'><h4>Cast:</h4></div>
+    </div>
+    <div class='card-body'>
+      <div class='table-responcive'>
+          <table class='table'
+                *ngIf='cast && cast.length'>        
+              <tbody>
+                  <tr *ngFor='let actor of cast'>
+                      <td>
+                        <a>
+                          <img *ngIf = 'actor.profile_path'
+                              [src] = 'actor.profile_path'
+                              [title] = 'actor.name'
+                              [style.width.px] = 50>
+                        </a>
+                      </td>
+                      <td> {{ actor.name }}  </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+    </div>
+  </div>  
   <div class='card-footer'>
     <button class='btn btn-outline-secondary'
             (click)='onBack()'

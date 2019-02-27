@@ -1,3 +1,11 @@
+
+export interface IBelongsToCollection {
+    id: number;
+    name: string;
+    poster_path: string;
+    backdrop_path: string;
+}
+
 export interface IGenre {
     id: number;
     name: string;
@@ -20,10 +28,36 @@ export interface ISpokenLanguage {
     name: string;
 }
 
+export interface ICast {
+    cast_id: number;
+    character: string;
+    credit_id: string;
+    gender: number;
+    id: number;
+    name: string;
+    order: number;
+    profile_path: string;
+}
+
+export interface ICrew {
+    credit_id: string;
+    department: string;
+    gender: number;
+    id: number;
+    job: string;
+    name: string;
+    profile_path: string;
+}
+
+export interface ICredits {
+    cast: ICast[];
+    crew: ICrew[];
+}
+
 export interface IMovieDetails {
     adult: boolean;
     backdrop_path: string;
-    belongs_to_collection?: any;
+    belongs_to_collection: IBelongsToCollection;
     budget: number;
     genres: IGenre[];
     homepage: string;
@@ -46,4 +80,5 @@ export interface IMovieDetails {
     video: boolean;
     vote_average: number;
     vote_count: number;
+    credits: ICredits;
 }
