@@ -7,9 +7,17 @@
         <ul class="dropdown-menu">
             <li><a  [routerLink]="['/movies', 'popular']">Popular</a></li>
             <li><a [routerLink]="['/movies', 'upcoming']">Upcoming</a></li>
-        </ul>
-      </div>
+        </ul>        
+      </div>      
     </ul>
+  </div>
+  <div class="navbar-collapse">
+    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">    
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" [(ngModel)]='listFilter' name='search'>
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click) = Search()>Search</button>
+        </form>  
+    </ul> 
   </div> 
 </nav>
 <router-outlet></router-outlet>

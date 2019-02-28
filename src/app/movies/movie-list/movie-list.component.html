@@ -16,7 +16,7 @@
               <tbody>
                   <tr *ngFor='let movie of movies'>
                       <td>
-                        <a [routerLink]="['/movie', movie.id]">
+                        <a [routerLink]= "['/movie', movie.id]">
                             <img *ngIf = 'movie.poster_path'
                                 [src] = 'movie.poster_path'
                                 [title] = 'movie.title'

@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     RouterModule.forChild([
+      {path: 'movies/:list/:query', component: MovieListComponent },
       {path: 'movies/:list', component: MovieListComponent },
       {path: 'movie/:id', component: MovieDetailsComponent }
     ])
