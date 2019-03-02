@@ -27,6 +27,7 @@ export class MovieDetailsComponent implements OnInit {
   posterUrl: string;
   genres: string;
   cast: ICast[];
+  videoKey: string;
 
   private posterUrlPreffix = 'http://image.tmdb.org/t/p/w500';
 
@@ -40,7 +41,7 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   onBack(): void {
-    this.location.back();
+    this.location.back(); 
   }
 
   private GetMovieDetails(id: string): void {
@@ -60,6 +61,15 @@ export class MovieDetailsComponent implements OnInit {
               }
             });
             this.cast = movieDetails.credits.cast;
+
+            movieDetails.videos.results.some(video => {
+              console.log(video.type + ' ' + video.key);
+              if (video.type.toLowerCase() === 'trailer') {
+                this.videoKey = video.key;
+                return true;
+              }
+              return false;
+            });
         }
     );
   }

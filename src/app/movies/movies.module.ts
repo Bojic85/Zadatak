@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { MovieListComponent } from './movie-list/movie-list.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { RouterModule } from '@angular/router';
+import { YouTubeUrlPipe } from '../pipe/youtube-url.pipe';
 
 
 @NgModule({
   declarations: [
     MovieListComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
+    YouTubeUrlPipe
   ],
   imports: [
     CommonModule,

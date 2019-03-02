@@ -17,7 +17,7 @@ export class TheMovieDbService {
 
   GetMovieDetails(id: string): Observable<IMovieDetails> {
      const movieUrl =
-     `https://api.themoviedb.org/3/movie/${id}?api_key=a00bf2c0862f1b5042df7c4a472075db&language=en-US&append_to_response=credits`;
+     `https://api.themoviedb.org/3/movie/${id}?api_key=a00bf2c0862f1b5042df7c4a472075db&language=en-US&append_to_response=credits,videos`;
      return this.http.get<IMovieDetails>(movieUrl);
   }
 

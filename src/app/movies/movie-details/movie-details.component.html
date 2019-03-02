@@ -28,9 +28,16 @@
     <div class='row'>
         <div class='col-md-10'>{{overview}}</div>
     </div>
+    <div class='row' *ngIf = 'videoKey'>
+      <div class='col-md-12'>
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe [src]='videoKey | youtube' frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>     
+    </div>
     <div class='row'>
       <div class='col-md-2'><h4>Cast:</h4></div>
-    </div>
+    </div>    
     <div class='card-body'>
       <div class='table-responcive'>
           <table class='table'

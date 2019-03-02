@@ -54,6 +54,21 @@ export interface ICredits {
     crew: ICrew[];
 }
 
+export interface IVideo {
+    id: string;
+    iso_639_1: string;
+    iso_3166_1: string;
+    key: string;
+    name: string;
+    site: string;
+    size: number;
+    type: string;
+}
+
+export interface IVideos {
+    results: IVideo[];
+}
+
 export interface IMovieDetails {
     adult: boolean;
     backdrop_path: string;
@@ -81,4 +96,5 @@ export interface IMovieDetails {
     vote_average: number;
     vote_count: number;
     credits: ICredits;
+    videos: IVideos;
 }

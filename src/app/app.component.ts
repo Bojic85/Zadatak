@@ -10,6 +10,7 @@ import { stringify } from 'querystring';
 export class AppComponent {
   title = 'Angular zadatak';
   listFilter = '';
+  url = 'https://www.youtube.com/embed/g4Hbz2jLxvQ';
 
   constructor(private router: Router) {}
 
