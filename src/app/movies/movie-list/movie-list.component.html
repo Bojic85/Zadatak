@@ -1,36 +1,31 @@
 <div class='card'>
-  <div class='card-header'>
-      {{pageTitle}}
-  </div>
-  <div class='card-body'>
-      <div class='table-responcive'>
-          <table class='table'
-                *ngIf='movies && movies.length'>
-              <thead>
-                  <tr>
-                        <th></th>
-                        <th>Title</th>
-                        <th>Overview</th>
-                  </tr>
-              </thead>            
-              <tbody>
-                  <tr *ngFor='let movie of movies'>
-                      <td>
+    <div class='card-header'>
+        {{pageTitle}}
+    </div>
+    <div class='card-body'>
+    <tr *ngFor='let movie of movies'>
+        <div class="thumbnail">
+            <div class="row">
+                <div class="col align" >
                         <a [routerLink]= "['/movie', movie.id]">
-                            <img *ngIf = 'movie.poster_path'
+                            <img id="list-poster" *ngIf = 'movie.poster_path'
                                 [src] = 'movie.poster_path'
-                                [title] = 'movie.title'
-                                [style.width.px] = 100>
+                                [title] = 'movie.title'>
+                            <img id="list-poster" *ngIf = '!movie.poster_path'
+                                [src] = '"./assets/images/no-movie.jpg"'
+                                [title] = 'movie.title'>
                         </a>
-                      </td>
-                      <td> <a [routerLink]="['/movie', movie.id]">
-                                {{ movie.title }}
-                            </a>                            
-                      </td>
-                      <td>{{ movie.overview }}</td>
-                  </tr>
-              </tbody>
-          </table>
-      </div>
-  </div>
+                </div>        
+                <div class="col-10 align" >
+                    <h5>
+                        <a [routerLink]="['/movie', movie.id]">
+                        {{ movie.title }}
+                        </a>  
+                    </h5>
+                    <p>{{ movie.overview }}</p>       
+                </div>
+            </div>
+        </div>
+    </tr>
+    </div>
 </div>

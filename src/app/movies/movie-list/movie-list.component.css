@@ -1,0 +1,12 @@
+.thumbnail {
+    margin: 2px;
+    border: 1px solid lightgrey ;
+}
+
+#list-poster{
+    margin: 5px 5px 5px 5px;
+    max-width: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
