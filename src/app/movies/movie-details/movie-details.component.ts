@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
 import { TheMovieDbService } from '../the-movie-db.service';
 import { ICast } from './movie-details.interface';
+import { Subscription } from 'rxjs';
 
 export interface IProduct {
   productId: number;
@@ -20,7 +21,7 @@ export interface IProduct {
   templateUrl: './movie-details.component.html',
   styleUrls: ['./movie-details.component.css']
 })
-export class MovieDetailsComponent implements OnInit {
+export class MovieDetailsComponent implements OnInit, OnDestroy {
   title: string;
   overview: string;
   releaseDate: string;
@@ -30,6 +31,7 @@ export class MovieDetailsComponent implements OnInit {
   videoKey: string;
 
   private posterUrlPreffix = 'http://image.tmdb.org/t/p/w500';
+  private paramsSubscription: Subscription;
 
   constructor(private theMovieDbService: TheMovieDbService,
               private route: ActivatedRoute,
@@ -40,12 +42,16 @@ export class MovieDetailsComponent implements OnInit {
     this.GetMovieDetails(id);
   }
 
+  ngOnDestroy() {
+    this.paramsSubscription.unsubscribe();
+  }
+
   onBack(): void {
-    this.location.back(); 
+    this.location.back();
   }
 
   private GetMovieDetails(id: string): void {
-    this.theMovieDbService.GetMovieDetails(id).subscribe(
+    this.paramsSubscription = this.theMovieDbService.GetMovieDetails(id).subscribe(
       movieDetails => {
             this.title = movieDetails.title;
             this.releaseDate = movieDetails.release_date;

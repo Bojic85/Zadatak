@@ -1,26 +1,29 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import { TheMovieDbService } from '../the-movie-db.service';
 import { IMovieData } from './movie-data.interface';
 import { ActivatedRoute } from '@angular/router';
 import { IMovieList } from './movie-list.interface';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-movie-list',
   templateUrl: './movie-list.component.html',
   styleUrls: ['./movie-list.component.css']
 })
-export class MovieListComponent implements OnInit {
+export class MovieListComponent implements OnInit, OnDestroy {
   pageTitle = 'The top popular movies';
   movies: IMovieData[];
   errorMessage = '';
 
   private posterUrlPreffix = 'http://image.tmdb.org/t/p/w500';
+  private paramsSubscription: Subscription;
+  private routeSubscription: Subscription;
 
   constructor(private theMovieDbService: TheMovieDbService,
               private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+    this.routeSubscription = this.route.params.subscribe(params => {
       if (params.list === 'search') {
         this.SearchMovies(params.query);
         this.pageTitle = `Movie search: ${params.query}`;
@@ -31,8 +34,13 @@ export class MovieListComponent implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    this.paramsSubscription.unsubscribe();
+    this.routeSubscription.unsubscribe();
+  }
+
   private GetMoviesData(listType: string): void {
-    this.theMovieDbService.GetMovieList(listType).subscribe(
+    this.paramsSubscription = this.theMovieDbService.GetMovieList(listType).subscribe(
       movieList => {
           this.GetMovies(movieList);
         },
@@ -41,7 +49,7 @@ export class MovieListComponent implements OnInit {
   }
 
   private SearchMovies(query: string): void {
-    this.theMovieDbService.MultiSearch(query).subscribe(
+    this.paramsSubscription = this.theMovieDbService.MultiSearch(query).subscribe(
       movieList => {
             this.GetMovies(movieList);
         },
