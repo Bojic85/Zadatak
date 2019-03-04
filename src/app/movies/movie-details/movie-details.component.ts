@@ -5,17 +5,6 @@ import { TheMovieDbService } from '../the-movie-db.service';
 import { ICast } from './movie-details.interface';
 import { Subscription } from 'rxjs';
 
-export interface IProduct {
-  productId: number;
-  productName: string;
-  productCode: string;
-  releaseDate: string;
-  price: number;
-  description: string;
-  starRating: number;
-  imageUrl: string;
-}
-
 @Component({
   selector: 'app-movie-details',
   templateUrl: './movie-details.component.html',
@@ -69,7 +58,6 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
             this.cast = movieDetails.credits.cast;
 
             movieDetails.videos.results.some(video => {
-              console.log(video.type + ' ' + video.key);
               if (video.type.toLowerCase() === 'trailer') {
                 this.videoKey = video.key;
                 return true;

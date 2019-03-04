@@ -1,42 +1,47 @@
 <div class='card'>
   <div class='card-header'>
-    {{title}}
+    <h4>{{title}}</h4>
   </div>
   <div class='card-body'>
     <div class='row'>
-      <div class='col-md-4' *ngIf = 'posterUrl'>
-        <img class='center-block img-responsive'
-              [style.width.px]='240'
-              [style.margin.px]='2'
-              [src]='posterUrl'
-              [title]=''>
+      <div class='col' *ngIf = 'posterUrl'>
+        <img id="poster" 
+              [src]='posterUrl'>
       </div> 
-      <div class='col-md-6'>
-        <div class='row'>
-          <div class='col-md-4'><h5>Release date:</h5></div>
-          <div class='col-md-6'>{{releaseDate | date}} </div>
-        </div>   
-        <div class='row'>
-            <div class='col-md-4'><h5>Genres:</h5></div>
-            <div class='col-md-6'>{{genres}} </div>
-          </div>       
+      <div class='col-8'>
+        <span class="text-nowrap">
+          <div class='row' *ngIf = 'releaseDate'>         
+              <div class='col-6'><h5>Release date:</h5></div>
+          </div>
+          <div class='row' *ngIf = 'releaseDate'>
+            <div class='col-8'>{{releaseDate | date}} </div>          
+          </div>   
+          <div class='row' *ngIf = 'genres'>
+              <div class='col-6'><h5>Genres:</h5></div>
+          </div>
+        </span>
+        <div class='row' *ngIf = 'genres'>
+          <div class='col-8'>{{genres}} </div>
+        </div>       
       </div>           
     </div>
+    <span class="text-nowrap">
+      <div class='row' *ngIf = 'genres'>
+          <div class='col'><h4>Overview:</h4></div>
+      </div>
+    </span>
     <div class='row'>
-        <div class='col-md-2'><h4>Overview:</h4></div>
-    </div>
-    <div class='row'>
-        <div class='col-md-10'>{{overview}}</div>
+        <div class='col'>{{overview}}</div>
     </div>
     <div class='row' *ngIf = 'videoKey'>
-      <div class='col-md-12'>
+      <div class='col'>
         <div class="embed-responsive embed-responsive-16by9">
           <iframe [src]='videoKey | youtube' frameborder="0" allowfullscreen></iframe>
         </div>
       </div>     
     </div>
-    <div class='row'>
-      <div class='col-md-2'><h4>Cast:</h4></div>
+    <div class='row' *ngIf='cast && cast.length'>
+      <div class='col'><h4>Cast:</h4></div>
     </div>    
     <div class='card-body'>
       <div class='table-responcive'>
@@ -44,7 +49,7 @@
                 *ngIf='cast && cast.length'>        
               <tbody>
                   <tr *ngFor='let actor of cast'>
-                      <td>
+                      <td width = '50'>
                         <a>
                           <img *ngIf = 'actor.profile_path'
                               [src] = 'actor.profile_path'
