@@ -9,10 +9,10 @@
                 <div class="col align" >
                         <a [routerLink]= "['/movie', movie.id]">
                             <img id="list-poster" *ngIf = 'movie.poster_path'
-                                [src] = 'movie.poster_path'
+                                [src] = 'movie.poster_path | poster'
                                 [title] = 'movie.title'>
                             <img id="list-poster" *ngIf = '!movie.poster_path'
-                                [src] = '"./assets/images/no-movie.jpg"'
+                                src = './assets/images/no-movie.jpg'
                                 [title] = 'movie.title'>
                         </a>
                 </div>        

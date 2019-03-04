@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy} from '@angular/core';
 import { TheMovieDbService } from '../the-movie-db.service';
 import { IMovieData } from './movie-data.interface';
 import { ActivatedRoute } from '@angular/router';
-import { IMovieList } from './movie-list.interface';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -15,7 +14,6 @@ export class MovieListComponent implements OnInit, OnDestroy {
   movies: IMovieData[];
   errorMessage = '';
 
-  private posterUrlPreffix = 'http://image.tmdb.org/t/p/w500';
   private paramsSubscription: Subscription;
   private routeSubscription: Subscription;
 
@@ -42,7 +40,7 @@ export class MovieListComponent implements OnInit, OnDestroy {
   private GetMoviesData(listType: string): void {
     this.paramsSubscription = this.theMovieDbService.GetMovieList(listType).subscribe(
       movieList => {
-          this.GetMovies(movieList);
+          this.movies = movieList.results;
         },
         error => this.errorMessage = error as any
     );
@@ -51,18 +49,9 @@ export class MovieListComponent implements OnInit, OnDestroy {
   private SearchMovies(query: string): void {
     this.paramsSubscription = this.theMovieDbService.MultiSearch(query).subscribe(
       movieList => {
-            this.GetMovies(movieList);
+          this.movies = movieList.results;
         },
         error => this.errorMessage = error as any
     );
-  }
-
-  private GetMovies(movieList: IMovieList) {
-    movieList.results.forEach(movie => {
-      if (movie.poster_path !== null) {
-        movie.poster_path = this.posterUrlPreffix + movie.poster_path;
-      }
-    });
-    this.movies = movieList.results;
   }
 }

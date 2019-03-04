@@ -4,13 +4,15 @@ import { MovieListComponent } from './movie-list/movie-list.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { RouterModule } from '@angular/router';
 import { YouTubeUrlPipe } from '../pipe/youtube-url.pipe';
+import { PosterUrlPipe } from '../pipe/poster-url.pipe';
 
 
 @NgModule({
   declarations: [
     MovieListComponent,
     MovieDetailsComponent,
-    YouTubeUrlPipe
+    YouTubeUrlPipe,
+    PosterUrlPipe
   ],
   imports: [
     CommonModule,

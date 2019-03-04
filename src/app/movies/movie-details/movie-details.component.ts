@@ -19,7 +19,6 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   cast: ICast[];
   videoKey: string;
 
-  private posterUrlPreffix = 'http://image.tmdb.org/t/p/w500';
   private paramsSubscription: Subscription;
 
   constructor(private theMovieDbService: TheMovieDbService,
@@ -46,15 +45,7 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
             this.releaseDate = movieDetails.release_date;
             this.overview = movieDetails.overview;
             this.genres = movieDetails.genres.map(e => e.name).join(', ');
-            if (movieDetails.poster_path !== null) {
-              this.posterUrl = this.posterUrlPreffix + movieDetails.poster_path;
-            }
-
-            movieDetails.credits.cast.forEach(element => {
-              if (element.profile_path !== null) {
-                element.profile_path = this.posterUrlPreffix + element.profile_path;
-              }
-            });
+            this.posterUrl = movieDetails.poster_path;
             this.cast = movieDetails.credits.cast;
 
             movieDetails.videos.results.some(video => {
