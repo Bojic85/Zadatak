@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
 import { TheMovieDbService } from '../the-movie-db.service';
-import { ICast } from './movie-details.interface';
+import { ICast } from '../interfaces/cast.interface';
 import { Subscription } from 'rxjs';
 
 @Component({

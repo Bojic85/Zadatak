@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IMovieList } from './movie-list/movie-list.interface';
+import { IMovieList } from './interfaces/movie-list.interface';
 import { Observable } from 'rxjs';
-import { IMovieDetails } from './movie-details/movie-details.interface';
+import { IMovieDetails } from './interfaces/movie-details.interface';
 
 @Injectable({
   providedIn: 'root'

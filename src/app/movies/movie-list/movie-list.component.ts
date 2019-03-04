@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { TheMovieDbService } from '../the-movie-db.service';
-import { IMovieData } from './movie-data.interface';
+import { IMovieData } from '../interfaces/movie-data.interface';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
